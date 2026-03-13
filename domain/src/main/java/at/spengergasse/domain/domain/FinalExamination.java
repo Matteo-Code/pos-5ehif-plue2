@@ -1,4 +1,4 @@
-package at.spengergasse.domain;
+package at.spengergasse.domain.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "final_exams")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class FinalExamination {
 
     @EmbeddedId
@@ -27,6 +26,6 @@ public class FinalExamination {
     private LocalDate to;
 
     @Embeddable
-    public record FinalExaminationId(@Id @GeneratedValue Long value) {}
+    public record FinalExaminationId(@GeneratedValue Long id) {}
 
 }

@@ -1,7 +1,7 @@
-package at.spengergasse.persistence;
+package at.spengergasse.domain.persistence;
 
-import at.spengergasse.domain.Exam;
-import at.spengergasse.domain.WrittenExam;
+import at.spengergasse.domain.domain.Exam;
+import at.spengergasse.domain.domain.WrittenExam;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

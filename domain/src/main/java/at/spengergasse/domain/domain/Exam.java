@@ -1,12 +1,20 @@
-package at.spengergasse.domain;
+package at.spengergasse.domain.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
+@SuperBuilder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+
 @Entity
 @Table(name = "exams")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Exam {
 
     @EmbeddedId
@@ -19,6 +27,6 @@ public class Exam {
     private LocalDateTime examEnd;
 
     @Embeddable
-    public record ExamId(@Id @GeneratedValue Long value) {}
+    public record ExamId(@GeneratedValue Long id) {}
 
 }

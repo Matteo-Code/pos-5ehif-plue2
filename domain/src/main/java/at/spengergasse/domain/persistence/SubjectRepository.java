@@ -1,6 +1,6 @@
-package at.spengergasse.persistence;
+package at.spengergasse.domain.persistence;
 
-import at.spengergasse.domain.Subject;
+import at.spengergasse.domain.domain.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

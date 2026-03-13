@@ -1,4 +1,4 @@
-package at.spengergasse.domain;
+package at.spengergasse.domain.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -20,6 +20,6 @@ public class Subject {
     private String description;
 
     @Embeddable
-    public record SubjectId(@Id @GeneratedValue Long value) {}
+    public record SubjectId(@GeneratedValue Long id) {}
 
 }
