@@ -13,33 +13,33 @@ import static org.assertj.core.api.Assumptions.assumeThat;
 
 @DataJpaTest
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-public class ExamRepositoryTest {
+public class OralExamRepositoryTest {
 
     @Autowired
-    ExamRepository examRepository;
+    OralExamRepository oralExamRepository;
 
     @BeforeEach
     void setup() {
-        assumeThat(examRepository).isNotNull();
+        assumeThat(oralExamRepository).isNotNull();
     }
 
     @Test
     void can_save_exam() {
-        var saved = examRepository.save(ExamFixtures.exam());
+        var saved = oralExamRepository.save(ExamFixtures.oralExam());
 
         assertThat(saved).isNotNull();
-        assertThat(saved.getExamStart()).isEqualTo(ExamFixtures.exam().getExamStart());
+        assertThat(saved.getExamStart()).isEqualTo(ExamFixtures.oralExam().getExamStart());
     }
 
     @Test
     void can_save_and_find_exam() {
-        var saved = examRepository.save(ExamFixtures.exam());
+        var saved = oralExamRepository.saveAndFlush(ExamFixtures.oralExam());
 
-        var found = examRepository.findById(saved.getId());
+        var found = oralExamRepository.findById(saved.getId());
 
         assertThat(found.isPresent()).isTrue();
         assertThat(found.get().getId()).isEqualTo(saved.getId());
-        assertThat(found.get().getExamEnd()).isEqualTo(ExamFixtures.exam().getExamEnd());
+        assertThat(found.get().getExamEnd()).isEqualTo(ExamFixtures.oralExam().getExamEnd());
     }
 
 }

@@ -1,6 +1,6 @@
 package at.spengergasse.domain.persistence;
 
-import at.spengergasse.domain.fixtures.ExamFixtures;
+import at.spengergasse.domain.fixtures.StudentFixtures;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -13,33 +13,33 @@ import static org.assertj.core.api.Assumptions.assumeThat;
 
 @DataJpaTest
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-public class ExamRepositoryTest {
+public class StudentRepositoryTest {
 
     @Autowired
-    ExamRepository examRepository;
+    StudentRepository studentRepository;
 
     @BeforeEach
     void setup() {
-        assumeThat(examRepository).isNotNull();
+        assumeThat(studentRepository).isNotNull();
     }
 
     @Test
-    void can_save_exam() {
-        var saved = examRepository.save(ExamFixtures.exam());
+    void can_save_student() {
+        var saved = studentRepository.save(StudentFixtures.student());
 
         assertThat(saved).isNotNull();
-        assertThat(saved.getExamStart()).isEqualTo(ExamFixtures.exam().getExamStart());
+        assertThat(saved.getId()).isEqualTo(StudentFixtures.student().getId());
     }
 
     @Test
-    void can_save_and_find_exam() {
-        var saved = examRepository.save(ExamFixtures.exam());
+    void can_save_and_find_student() {
+        var saved = studentRepository.saveAndFlush(StudentFixtures.student());
 
-        var found = examRepository.findById(saved.getId());
+        var found = studentRepository.findById(saved.getId());
 
         assertThat(found.isPresent()).isTrue();
         assertThat(found.get().getId()).isEqualTo(saved.getId());
-        assertThat(found.get().getExamEnd()).isEqualTo(ExamFixtures.exam().getExamEnd());
+        assertThat(found.get().getBirthDate()).isEqualTo(StudentFixtures.student().getBirthDate());
     }
 
 }

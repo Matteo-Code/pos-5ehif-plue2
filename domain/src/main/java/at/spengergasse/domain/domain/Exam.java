@@ -26,6 +26,10 @@ public class Exam {
     @NotNull
     private LocalDateTime examEnd;
 
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "examination", foreignKey = @ForeignKey(name = "examination__exam__2__final_examination"))
+    private FinalExamination examination;
+
     @Embeddable
     public record ExamId(@GeneratedValue Long id) {}
 
