@@ -10,7 +10,6 @@ public class TeacherFixtures {
 
     public static Teacher TEACHER_1 = Teacher
             .builder()
-            .id(new Teacher.TeacherId(1L))
             .teacherIdentifier(new PersonIdentifier("ABC123456"))
             .firstName("Test")
             .lastName("Test")

@@ -1,5 +1,6 @@
 package at.spengergasse.domain.persistence;
 
+import at.spengergasse.domain.domain.Exam;
 import at.spengergasse.domain.fixtures.ExamFixtures;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -34,7 +35,6 @@ public class ExamRepositoryTest {
     @Test
     void can_save_and_find_exam() {
         var saved = examRepository.save(ExamFixtures.exam());
-
         var found = examRepository.findById(saved.getId());
 
         assertThat(found.isPresent()).isTrue();
@@ -42,4 +42,39 @@ public class ExamRepositoryTest {
         assertThat(found.get().getExamEnd()).isEqualTo(ExamFixtures.exam().getExamEnd());
     }
 
+    @Test
+    void can_find_by_student() {
+        var saved = examRepository.save(ExamFixtures.exam2());
+        var found = examRepository.findByStudent(saved.getStudent());
+
+        assertThat(found.size()).isEqualTo(1);
+        assertThat(found)
+                .extracting(Exam::getStudent)
+                .containsOnly(saved.getStudent());
+        assertThat(found.getFirst().getExamStart()).isEqualTo(ExamFixtures.exam2().getExamStart());
+    }
+
+    @Test
+    void can_find_by_teacher() {
+        var saved = examRepository.save(ExamFixtures.exam2());
+        var found = examRepository.findByExaminerAndAssessor(saved.getExaminer().getId());
+
+        assertThat(found.size()).isEqualTo(1);
+        assertThat(found)
+                .extracting(Exam::getExaminer)
+                .containsOnly(saved.getExaminer());
+        assertThat(found.getFirst().getExamStart()).isEqualTo(ExamFixtures.exam2().getExamStart());
+    }
+
+    @Test
+    void can_find_by_subject() {
+        var saved = examRepository.save(ExamFixtures.exam2());
+        var found = examRepository.findBySubject(saved.getSubject());
+
+        assertThat(found.size()).isEqualTo(1);
+        assertThat(found)
+                .extracting(Exam::getSubject)
+                .containsOnly(saved.getSubject());
+        assertThat(found.getFirst().getExamStart()).isEqualTo(ExamFixtures.exam2().getExamStart());
+    }
 }

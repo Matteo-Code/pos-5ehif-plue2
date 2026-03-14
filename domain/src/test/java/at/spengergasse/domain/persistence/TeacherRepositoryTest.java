@@ -1,6 +1,5 @@
 package at.spengergasse.domain.persistence;
 
-import at.spengergasse.domain.fixtures.StudentFixtures;
 import at.spengergasse.domain.fixtures.TeacherFixtures;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -35,7 +34,6 @@ public class TeacherRepositoryTest {
     @Test
     void can_save_and_find_student() {
         var saved = teacherRepository.saveAndFlush(TeacherFixtures.teacher());
-
         var found = teacherRepository.findById(saved.getId());
 
         assertThat(found.isPresent()).isTrue();

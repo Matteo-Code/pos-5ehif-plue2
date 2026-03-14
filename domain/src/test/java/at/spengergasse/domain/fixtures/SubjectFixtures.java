@@ -6,7 +6,6 @@ public class SubjectFixtures {
 
     public static Subject SUBJECT_1 = Subject
             .builder()
-            .id(new Subject.SubjectId(1L))
             .code("POS")
             .name("Programming and Software Engineering")
             .description("Spring Boot")

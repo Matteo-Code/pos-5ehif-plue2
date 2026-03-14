@@ -34,7 +34,6 @@ public class StudentRepositoryTest {
     @Test
     void can_save_and_find_student() {
         var saved = studentRepository.saveAndFlush(StudentFixtures.student());
-
         var found = studentRepository.findById(saved.getId());
 
         assertThat(found.isPresent()).isTrue();

@@ -1,6 +1,5 @@
 package at.spengergasse.domain.persistence;
 
-import at.spengergasse.domain.fixtures.ExamFixtures;
 import at.spengergasse.domain.fixtures.SubjectFixtures;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -35,7 +34,6 @@ public class SubjectRepositoryTest {
     @Test
     void can_save_and_find_exam() {
         var saved = subjectRepository.saveAndFlush(SubjectFixtures.subject());
-
         var found = subjectRepository.findById(saved.getId());
 
         assertThat(found.isPresent()).isTrue();

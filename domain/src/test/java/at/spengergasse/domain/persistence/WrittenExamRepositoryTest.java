@@ -34,7 +34,6 @@ public class WrittenExamRepositoryTest {
     @Test
     void can_save_and_find_exam() {
         var saved = writtenExamRepository.save(ExamFixtures.writtenExam());
-
         var found = writtenExamRepository.findById(saved.getId());
 
         assertThat(found.isPresent()).isTrue();

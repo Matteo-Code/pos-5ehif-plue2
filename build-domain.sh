@@ -1,0 +1,1 @@
+mvn -pl domain clean verify

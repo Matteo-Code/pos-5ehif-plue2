@@ -9,7 +9,6 @@ public class StudentFixtures {
 
     public static Student STUDENT_1 = Student
             .builder()
-            .id(new Student.StudentId(1L))
             .studentIdentifier(new PersonIdentifier("ABC123456"))
             .firstName("Test")
             .lastName("Test")

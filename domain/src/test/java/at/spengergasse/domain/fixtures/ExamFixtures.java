@@ -10,7 +10,6 @@ public class ExamFixtures {
 
     public static Exam EXAM_1 = Exam
             .builder()
-            .id(new Exam.ExamId(1L))
             .examStart(LocalDateTime.of(2026, 3, 13, 13, 52))
             .examEnd(LocalDateTime.of(2026, 3, 13, 17, 0))
             .examination(mock(FinalExamination.class))
@@ -21,7 +20,6 @@ public class ExamFixtures {
 
     public static OralExam ORAL_EXAM_1 = OralExam
             .builder()
-            .id(new Exam.ExamId(1L))
             .examStart(LocalDateTime.of(2026, 3, 13, 13, 52))
             .examEnd(LocalDateTime.of(2026, 3, 13, 17, 0))
             .preparationStart(LocalDateTime.of(2026, 3,13, 14, 0))
@@ -31,9 +29,19 @@ public class ExamFixtures {
             .examiner(mock(Teacher.class))
             .build();
 
+    public static Exam EXAM_2 = Exam
+            .builder()
+            .examStart(LocalDateTime.of(2026, 3, 13, 13, 52))
+            .examEnd(LocalDateTime.of(2026, 3, 13, 17, 0))
+            .examination(FinalExaminationFixtures.finalExamination())
+            .student(StudentFixtures.student())
+            .assessor(TeacherFixtures.teacher())
+            .examiner(TeacherFixtures.teacher())
+            .subject(SubjectFixtures.subject())
+            .build();
+
     public static WrittenExam WRITTEN_EXAM_1 = WrittenExam
             .builder()
-            .id(new Exam.ExamId(1L))
             .examStart(LocalDateTime.of(2026, 3, 13, 13, 52))
             .examEnd(LocalDateTime.of(2026, 3, 13, 17, 0))
             .examination(mock(FinalExamination.class))
@@ -52,6 +60,10 @@ public class ExamFixtures {
 
     public static WrittenExam writtenExam() {
         return WRITTEN_EXAM_1;
+    }
+
+    public static Exam exam2() {
+        return EXAM_2;
     }
 
 }

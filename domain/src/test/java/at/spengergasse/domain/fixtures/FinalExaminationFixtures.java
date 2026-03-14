@@ -13,7 +13,6 @@ public class FinalExaminationFixtures {
 
     public static FinalExamination FINAL_EXAMINATION_1 = FinalExamination
             .builder()
-            .id(new FinalExamination.FinalExaminationId(1L))
             .code("FE123")
             .department("HIF")
             .fromDate(LocalDate.of(2026, 1,1))
