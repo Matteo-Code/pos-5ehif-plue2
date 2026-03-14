@@ -24,7 +24,7 @@ public class Student {
 
     @NotNull
     @Column(unique = true)
-    private String studentIdentifier;
+    private PersonIdentifier studentIdentifier;
 
     private String firstName;
 

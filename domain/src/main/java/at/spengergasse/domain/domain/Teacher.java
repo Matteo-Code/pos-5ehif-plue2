@@ -23,7 +23,7 @@ public class Teacher {
 
     @NotNull
     @Column(unique = true)
-    private String teacherIdentifier;
+    private PersonIdentifier teacherIdentifier;
 
     private String firstName;
 
