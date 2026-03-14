@@ -11,10 +11,6 @@ public record ElectiveSubjectSummary(
         List<Student> students
 ) {
 
-    public ElectiveSubjectSummary(ElectiveSubject subject, List<Student> students) {
-        this(subject.name(), students);
-    }
-
     public ElectiveSubjectSummary(Map.Entry<ElectiveSubject, List<Student>> entry) {
         this(entry.getKey().name(), entry.getValue());
     }

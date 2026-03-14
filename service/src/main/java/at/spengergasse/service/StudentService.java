@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class StudentService {
@@ -24,19 +25,7 @@ public class StudentService {
     }
 
     public List<ElectiveSubjectSummary> assignStudents() {
-        Map<ElectiveSubject, List<Student>> electives = new HashMap<>();
-
-
-        electives.putAll(
-                electiveSubjectRepository
-                        .findAll()
-                        .stream()
-                        .collect(Collectors.toMap(
-                        subject -> subject,
-                        _ -> new ArrayList<>()
-                        ))
-        );
-        electives.put(UNASSIGNED_SUBJECT, new ArrayList<>());
+        Map<ElectiveSubject, List<Student>> electives = constructInitialMap(electiveSubjectRepository.findAll());
 
         studentRepository
                 .findAllByYear(3)
@@ -44,28 +33,23 @@ public class StudentService {
                 .sorted(Comparator.comparing(Student::gradeAverage))
                 .map(student -> assignToSubject(student, electives))
                 .forEach(mappedEntry -> electives.get(mappedEntry.getValue()).add(mappedEntry.getKey()));
-                /*.forEach(student -> {
-                    var subject = assignToSubject(student, electives);
-                    if(subject != null) {
-                        electives.get(subject).add(student);
-                    }
-                });*/
 
         return electives.entrySet()
                 .stream()
                 .map(ElectiveSubjectSummary::new)
-                .sorted(Comparator.comparingInt(subject -> subject.students().size()))
-                .toList()
-                .reversed();
+                .sorted(Comparator.comparingInt((ElectiveSubjectSummary subject) -> subject.students().size())
+                        .reversed()
+                        .thenComparing(ElectiveSubjectSummary::name))
+                .toList();
     }
 
-    /*public ElectiveSubject assignToSubject(Student student, Map<ElectiveSubject, List<Student>> assigned) {
-        return student.subjects()
-                .stream()
-                .filter(subject -> assigned.get(subject).size() != subject.numSeats())
-                .findFirst()
-                .orElse(null);
-    }*/
+    public Map<ElectiveSubject, List<Student>> constructInitialMap(List<ElectiveSubject> subjects) {
+        return Stream.concat(subjects.stream(), Stream.of(UNASSIGNED_SUBJECT))
+                .collect(Collectors.toMap(
+                        subject -> subject,
+                        _ -> new ArrayList<>()
+                ));
+    }
 
     public Map.Entry<Student, ElectiveSubject> assignToSubject(Student student, Map<ElectiveSubject, List<Student>> assigned) {
         return Map.entry(student, student.subjects()
