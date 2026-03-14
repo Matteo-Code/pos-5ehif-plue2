@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @Data
 @AllArgsConstructor
@@ -27,6 +29,12 @@ public class Teacher {
 
     @NotNull
     private String lastName;
+
+    @OneToMany(mappedBy = "examiner")
+    private List<Exam> examsExamined;
+
+    @OneToMany(mappedBy = "assessor")
+    private List<Exam> examsAssessed;
 
     @Embeddable
     public record TeacherId(@GeneratedValue Long id) {}

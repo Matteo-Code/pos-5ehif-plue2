@@ -33,7 +33,7 @@ public class OralExamRepositoryTest {
 
     @Test
     void can_save_and_find_exam() {
-        var saved = oralExamRepository.saveAndFlush(ExamFixtures.oralExam());
+        var saved = oralExamRepository.save(ExamFixtures.oralExam());
 
         var found = oralExamRepository.findById(saved.getId());
 

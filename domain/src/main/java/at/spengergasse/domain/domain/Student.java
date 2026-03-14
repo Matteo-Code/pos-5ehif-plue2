@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @Data
@@ -32,6 +33,9 @@ public class Student {
 
     @NotNull
     private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "student")
+    private List<Exam> examsTaken;
 
     @Embeddable
     public record StudentId(@GeneratedValue Long id) {}

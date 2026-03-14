@@ -1,9 +1,6 @@
 package at.spengergasse.domain.fixtures;
 
-import at.spengergasse.domain.domain.Exam;
-import at.spengergasse.domain.domain.FinalExamination;
-import at.spengergasse.domain.domain.OralExam;
-import at.spengergasse.domain.domain.WrittenExam;
+import at.spengergasse.domain.domain.*;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +14,9 @@ public class ExamFixtures {
             .examStart(LocalDateTime.of(2026, 3, 13, 13, 52))
             .examEnd(LocalDateTime.of(2026, 3, 13, 17, 0))
             .examination(mock(FinalExamination.class))
+            .student(mock(Student.class))
+            .assessor(mock(Teacher.class))
+            .examiner(mock(Teacher.class))
             .build();
 
     public static OralExam ORAL_EXAM_1 = OralExam
@@ -25,6 +25,10 @@ public class ExamFixtures {
             .examStart(LocalDateTime.of(2026, 3, 13, 13, 52))
             .examEnd(LocalDateTime.of(2026, 3, 13, 17, 0))
             .preparationStart(LocalDateTime.of(2026, 3,13, 14, 0))
+            .examination(mock(FinalExamination.class))
+            .student(mock(Student.class))
+            .assessor(mock(Teacher.class))
+            .examiner(mock(Teacher.class))
             .build();
 
     public static WrittenExam WRITTEN_EXAM_1 = WrittenExam
@@ -33,6 +37,9 @@ public class ExamFixtures {
             .examStart(LocalDateTime.of(2026, 3, 13, 13, 52))
             .examEnd(LocalDateTime.of(2026, 3, 13, 17, 0))
             .examination(mock(FinalExamination.class))
+            .student(mock(Student.class))
+            .assessor(mock(Teacher.class))
+            .examiner(mock(Teacher.class))
             .build();
 
     public static Exam exam() {

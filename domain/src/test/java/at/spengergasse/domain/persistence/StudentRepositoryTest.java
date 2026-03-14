@@ -28,7 +28,7 @@ public class StudentRepositoryTest {
         var saved = studentRepository.save(StudentFixtures.student());
 
         assertThat(saved).isNotNull();
-        assertThat(saved.getId()).isEqualTo(StudentFixtures.student().getId());
+        assertThat(saved.getFirstName()).isEqualTo(StudentFixtures.student().getFirstName());
     }
 
     @Test
