@@ -19,8 +19,7 @@ import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(OptionalTopicRestController.class)
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -41,13 +40,28 @@ class OptionalTopicRestControllerTest {
     void create_optional_subject_returns_ok() throws Exception {
         when(optionalTopicService.createOptionalTopic(any())).thenReturn(TopicFixtures.optionalTopic());
 
-        CreateOptionalTopicCommand command = new CreateOptionalTopicCommand();
+        CreateOptionalTopicCommand command = new CreateOptionalTopicCommand("BAP", "Business Applications");
 
         mockMvc.perform(post("/api/topics")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(command)))
                 .andExpect(status().isCreated())
-                .andExpect(header().exists("Location"));
+                .andExpect(header().exists("Location"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.topicIdentifier").value(TopicFixtures.optionalTopic().topicIdentifier()))
+                .andReturn();
+    }
+
+    @Test
+    void invalid_command_returns_bad_request() throws Exception {
+        CreateOptionalTopicCommand command = new CreateOptionalTopicCommand("BAP", null);
+
+        mockMvc.perform(post("/api/topics")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(command)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
+                .andReturn();
     }
 
 }
