@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 
@@ -44,7 +43,7 @@ public class OptionalTopicRestController {
 
     @PatchMapping("/{id}/enroll/{student}")
     public ResponseEntity<Enrollment> enrollStudent2(@PathVariable Long id,
-                                                    @PathVariable("student") Long studentId) {
+                                                     @PathVariable("student") Long studentId) {
         return optionalTopicService.getOptionalTopicById(id)
                 .flatMap(topic -> studentService.getStudentById(studentId)
                         .flatMap(student -> optionalTopicService.enrollStudent(student, topic)))
