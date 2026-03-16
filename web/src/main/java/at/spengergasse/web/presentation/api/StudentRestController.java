@@ -33,7 +33,8 @@ public class StudentRestController {
     public ResponseEntity<List<OptionalTopic>> getTopics(@PathVariable Long id) {
         return ResponseEntity.ok(
                 studentService.getEnrollmentsByStudent(id)
-                        .stream().map(Enrollment::optionalTopic)
+                        .stream()
+                        .map(Enrollment::optionalTopic)
                         .toList()
         );
     }

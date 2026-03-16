@@ -45,7 +45,7 @@ class OptionalTopicRestControllerTest {
     void create_optional_topic_returns_ok() throws Exception {
         when(optionalTopicService.createOptionalTopic(any())).thenReturn(TopicFixtures.optionalTopic());
 
-        CreateOptionalTopicCommand command = new CreateOptionalTopicCommand("BAP", "Business Applications");
+        var command = new CreateOptionalTopicCommand("BAP", "Business Applications");
 
         mockMvc.perform(post("/api/topics")
                         .contentType(MediaType.APPLICATION_JSON)
