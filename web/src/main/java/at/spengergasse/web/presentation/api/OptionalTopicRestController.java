@@ -42,7 +42,7 @@ public class OptionalTopicRestController {
     }
 
     @PatchMapping("/{id}/enroll/{student}")
-    public ResponseEntity<Enrollment> enrollStudent2(@PathVariable Long id,
+    public ResponseEntity<Enrollment> enrollStudent(@PathVariable Long id,
                                                      @PathVariable("student") Long studentId) {
         return optionalTopicService.getOptionalTopicById(id)
                 .flatMap(topic -> studentService.getStudentById(studentId)
