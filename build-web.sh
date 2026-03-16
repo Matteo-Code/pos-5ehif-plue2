@@ -1,0 +1,1 @@
+mvn -pl web clean verify
